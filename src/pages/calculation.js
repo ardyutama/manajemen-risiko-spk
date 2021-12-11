@@ -122,7 +122,7 @@ export default function Decision() {
                     </p>
                     <a
                         href="userguide.pdf"
-                        download="userguide"
+                        download
                     >
                         User Guide
                     </a>
