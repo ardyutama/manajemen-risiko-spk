@@ -10,7 +10,7 @@ export default function Decision() {
     const [permintaan, setPermintaan] = useState("");
     const [probabilitas, setProbabilitas] = useState("");
     const [display, setDisplay] = useState(false);
-
+    const [findMax,setFindMax] = useState("");
     const addData = () => {
         if (permintaan !== "" && probabilitas !== "") {
             setData([
@@ -89,12 +89,21 @@ export default function Decision() {
             temp[i][temp.length] = sum;
         }
         setExReturn(transpose(temp));
+        console.log(typeof exReturn[4][3]);
     };
-
+    const handleFindMax = () => {
+        // let newArray= exReturn[4];
+        // console.log(newArray);
+        const calc = Math.max(...exReturn[4]);
+        setFindMax(calc);
+        console.log(findMax);
+    };
     useEffect(() => {
-        if (data.length > 0) calculateReturn();
+        if (data.length > 0) 
+        calculateReturn();
+        handleFindMax();
     }, [data, beli, jual]);
-
+    
     return (
         <div className="flex min-h-screen justify-center item-center bg-gray-200">
             <div className="p-8 inline-block m-4 border-2 rounded-lg bg-white">
@@ -397,6 +406,7 @@ export default function Decision() {
                                         </tbody>
                                     </table>
                                 </div>
+                                    <button class='rounded-full bg-blue-400 inline py-2 font-semibold text-blue-50'>Maka Hasil Terbaik adalah {findMax}</button>
                             </div>
                             <button
                                 type="button"
