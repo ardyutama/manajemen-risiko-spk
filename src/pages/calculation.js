@@ -34,6 +34,7 @@ export default function Decision() {
     const handleResetData = (i) => {
         const itemRemoved = data.splice(0, i);
         setData(data.filter((data) => data !== itemRemoved));
+        setFindMax("");
     };
 
     const handleKeyPress = (code) => {
@@ -89,19 +90,20 @@ export default function Decision() {
             temp[i][temp.length] = sum;
         }
         setExReturn(transpose(temp));
-        console.log(typeof exReturn[4][3]);
+        // handleFindMax();
+        console.log(payoffRef);
     };
     const handleFindMax = () => {
         // let newArray= exReturn[4];
         // console.log(newArray);
-        const calc = Math.max(...exReturn[4]);
+        const calc = Math.max(...exReturn[exReturn.length - 1]);
         setFindMax(calc);
-        console.log(findMax);
+        console.log(calc);
     };
     useEffect(() => {
         if (data.length > 0) 
         calculateReturn();
-        handleFindMax();
+        // handleFindMax();
     }, [data, beli, jual]);
     
     return (
@@ -113,6 +115,9 @@ export default function Decision() {
                         By Ardy Putra Utama - Politeknik Elektronika Negeri
                         Surabaya - 2110191056
                     </p>
+                    <a href="../assets/2110191056_Ardy Putra Utama3.pdf" download>
+                        User Guide
+                    </a>
                 </div>
                 <div className="flex flex-col gap-8 ">
                     <div className="flex font-bold mt-6 gap-4">
@@ -260,6 +265,7 @@ export default function Decision() {
                                 className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
                                 onClick={() => {
                                     setDisplay(!display);
+                                    handleFindMax();
                                 }}
                             >
                                 Hitung!
@@ -406,7 +412,9 @@ export default function Decision() {
                                         </tbody>
                                     </table>
                                 </div>
-                                    <button class='rounded-full bg-blue-400 inline py-2 font-semibold text-blue-50'>Maka Hasil Terbaik adalah {findMax}</button>
+                                <button class="rounded-full bg-blue-400 inline py-2 font-semibold text-blue-50">
+                                    Maka Hasil Terbaik adalah {findMax}
+                                </button>
                             </div>
                             <button
                                 type="button"
