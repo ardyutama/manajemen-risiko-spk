@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import InputText from "../components/inputText";
+import { saveAs } from "file-saver";
 export default function Decision() {
     const [data, setData] = useState([]);
     const [payoff, setPayoff] = useState([[]]);
@@ -10,7 +11,7 @@ export default function Decision() {
     const [permintaan, setPermintaan] = useState("");
     const [probabilitas, setProbabilitas] = useState("");
     const [display, setDisplay] = useState(false);
-    const [findMax,setFindMax] = useState("");
+    const [findMax, setFindMax] = useState("");
     const addData = () => {
         if (permintaan !== "" && probabilitas !== "") {
             setData([
@@ -42,7 +43,12 @@ export default function Decision() {
             addData();
         }
     };
-
+    const saveFile = () => {
+        saveAs(
+            "../../public/assets/2110191056_Ardy Putra Utama3.pdf",
+            "User Guide.pdf"
+        );
+    };
     const transpose = (a) => {
         return Object.keys(a[0]).map(function (c) {
             return a.map(function (r) {
@@ -101,11 +107,10 @@ export default function Decision() {
         console.log(calc);
     };
     useEffect(() => {
-        if (data.length > 0) 
-        calculateReturn();
+        if (data.length > 0) calculateReturn();
         // handleFindMax();
     }, [data, beli, jual]);
-    
+
     return (
         <div className="flex min-h-screen justify-center item-center bg-gray-200">
             <div className="p-8 inline-block m-4 border-2 rounded-lg bg-white">
@@ -115,7 +120,10 @@ export default function Decision() {
                         By Ardy Putra Utama - Politeknik Elektronika Negeri
                         Surabaya - 2110191056
                     </p>
-                    <a href="../assets/2110191056_Ardy Putra Utama3.pdf" download>
+                    <a
+                        href="userguide.pdf"
+                        download="userguide"
+                    >
                         User Guide
                     </a>
                 </div>
